@@ -2,9 +2,25 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from '../Header/Header';
 
+// DO NOT DO THIS
+// class Link extends Component {
+//     render() {
+//         return (
+//             <a href="https://www.google.com">GOOGLE</a>
+//         );
+//     }
+// }
+
 class App extends Component {
     state = {
         typedValue: 'Typing a new way',
+        message: 'Something Clever',
+        hide: false,
+        listMe: ['Shanice', 'Macy', 'James', 'Luke'],
+        objectPlease: {
+            name: 'Bobby Donuts',
+            occupation: 'cewl',
+        } 
     }
 
     // constructor(props) {
@@ -25,16 +41,23 @@ class App extends Component {
 
     clickButton = (event) => {
         this.setState({
-            message: this.state.message + ' Hello React',
+            hide: !this.state.hide,
         });
     }
 
     render() {
+        let messageElement = <p>{this.state.message}</p>;
+
+        if (this.state.hide) {
+            messageElement = null;
+        }
+
         return (
             <div>
                 <Header />
 
                 <div className="container">
+                    {/* <Link /> */}
                     <div>
                         <input
                             type="text"
@@ -47,7 +70,9 @@ class App extends Component {
                     </div>
 
                     You Typed: {this.state.typedValue}
-                    <p>{this.state.message}</p>
+                    {messageElement}
+                    {this.state.listMe}
+                    {JSON.stringify(this.state.objectPlease)}
                 </div>
             </div>
         );
